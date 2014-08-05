@@ -1,0 +1,145 @@
+#!/usr/bin/env bash
+# Usage: script/bootstrap [--clean] [--skip-database] [--log]
+# Ensures all gems are in vendor/cache and installed locally.
+
+set -o errexit
+set -o nounset
+
+# //////////////////////////////////////////////////////////////////////////////
+
+clean=false
+skip_database=false
+default_output='/dev/null'
+
+for arg in "$@"; do
+    case "$arg" in
+        '--clean' )
+            clean=true
+            ;;
+        '--skip-database' )
+            skip_database=true
+            ;;
+        '--log' )
+            default_output='./log/bootstrap.log'
+            ;;
+    esac
+done
+
+# //////////////////////////////////////////////////////////////////////////////
+
+# Ensure to be at the project root directory
+cd "$(dirname $0)/.."
+
+# Make log directory before doing everything else
+if [[ ! -d 'log' ]]; then
+    mkdir 'log' >> $default_output 2>&1
+fi
+
+# Setup logs
+echo "Logging script/bootstrap" > $default_output
+
+# //////////////////////////////////////////////////////////////////////////////
+
+# Check if Bundler is available at all
+suggest_bundler() {
+  echo "I couldn't find bundle command. Installing..." >&2
+  gem install bundler
+}
+
+bundler_exists() {
+  (bundle --version >> $default_output 2>&1)
+}
+
+bundler_exists || suggest_bundler
+
+# Check current environment for the expected version of Ruby
+expected_ruby=$(bundle platform --ruby | cut -f 2 -d ' ')
+detected_ruby=$(ruby -e 'print RUBY_VERSION')
+output=$(bundle check) && rc=$? || rc=$?
+if [[ "$expected_ruby" != "$detected_ruby" ]]; then
+    echo "$output" >&2
+    echo "  Consider installing $expected_ruby version of Ruby using rbenv." >&2
+    exit 1
+fi
+
+# Check if Bundle is installed in the current environment
+if [[ $rc -ne 0 && "$output" == "Your Ruby version is"* && "$output" == *"but your Gemfile specified"* ]]; then
+    echo "It seems you didn't install Bundler in current environment; you can run:" >&2
+    echo '  gem install bundler' >&2
+    exit 1
+fi
+
+# //////////////////////////////////////////////////////////////////////////////
+
+if $clean; then
+    echo -n 'Cleaning... '
+    rm -rf  vendor/cache
+    git checkout -- vendor/cache
+
+    rm -rf .bundle vendor/bundle
+    echo 'done'
+fi
+
+# //////////////////////////////////////////////////////////////////////////////
+
+touch 'log/development.log'
+touch 'log/test.log'
+touch 'log/sql.log'
+
+# //////////////////////////////////////////////////////////////////////////////
+
+echo -n 'Setting up your environment'
+if [[ ! -d 'vendor/bundle' ]]; then
+    echo -n ', this may take a while'
+fi
+echo -n '... '
+
+checksum=$(ruby -e "require 'digest'" -e "print Digest::MD5.hexdigest File.read('Gemfile')")
+installed=$(cat .bundle/checksum 2>> $default_output) || true
+if [[ ! -d '.bundle' ]]; then
+    mkdir '.bundle' >> $default_output 2>&1
+fi
+echo "$checksum" > ".bundle/checksum"
+
+# TODO: this may not be enough, for instance, if you switch to branch with a
+# different version of the same ruby gem. Better if you `bundle check` instead?
+if [[ "$checksum" != "$installed" ]]; then
+    rm -f .bundle/config
+    number_of_cores=$(($(sysctl -n hw.ncpu) - 1))
+    output=$(bundle install --local --jobs=$number_of_cores --path vendor/bundle --without=production --quiet  --clean) && rc=$? || rc=$?
+    if [[ $rc -ne 0 ]]; then
+        read -r firstline <<< "$output"
+        if [[ "$firstline" = "Some gems seem to be missing from your vendor/cache directory." ]]; then
+            echo
+            echo "$firstline"
+            echo -n 'Updating gems, this may take a while... '
+            bundle package --all >> $default_output
+            echo 'done'
+
+            exec "$0" # try again...
+        else
+            echo >&2
+            echo "$output" >&2
+            exit 1
+        fi
+    fi
+fi
+
+if [[ "$(git status --porcelain -- Gemfile.lock)" ]]; then
+    git add --all --force vendor/cache Gemfile.lock
+fi
+
+echo 'done'
+
+# //////////////////////////////////////////////////////////////////////////////
+
+if ! $skip_database; then
+    echo -n 'Setting-up the database... '
+
+    # Create or update the database
+    # Check for pending migrations and warn appropriately
+    # Using single call to bundle exec to speedup execution
+    bundle exec rake db:create db:migrate db:test:prepare >> $default_output 2>&1
+
+    echo 'done'
+fi

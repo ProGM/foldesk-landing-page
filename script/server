@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Usage: script/server
+#
+# Keep the Procfile simple
+# (Ref.: http://stackoverflow.com/a/11595600/11895)
+
+## Uncomment to use separate configurations for development and production
+# if [[ "$RACK_ENV" == "production" ]]; then
+#     # (e.g. `bundle exec unicorn -p $PORT -c ./config/unicorn.rb`)
+# else
+#     # (e.g. `bundle exec rails server -p $PORT`)
+# fi
+
+if [[ "$RACK_ENV" == "development" ]]; then
+    # (Ref.: https://github.com/charliesome/better_errors#unicorn-puma-and-other-multi-worker-servers)
+    export WEB_CONCURRENCY=1
+fi
+
+bundle exec unicorn -p $PORT -c ./config/unicorn.rb

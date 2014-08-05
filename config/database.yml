@@ -1,0 +1,70 @@
+<%# This is a slightly modified version of database.yml generated automatically
+<%# by Heroku for development and test environments. %>
+
+<%
+
+require 'cgi'
+require 'uri'
+require 'dotenv'
+
+# We could use Dotenv.load instead, but that wouldn't override variables that
+# are already defined, so here's our destructive version of it:
+%w(.env local/.env).each do |filename|
+  begin
+    Dotenv::Environment.new(filename).each { |k,v| ENV[k] = v }
+  rescue Errno::ENOENT => e
+    raise unless e.message.include? 'local/.env'
+  end
+end
+
+def attribute(name, value, force_string = false)
+  if value
+    value_string =
+      if force_string
+        '"' + value + '"'
+      else
+        value
+      end
+    "#{name}: #{value_string}"
+  else
+    ""
+  end
+end
+
+%w(development test).each do |environment|
+  database_url_key = "DATABASE_URL_#{environment.upcase}"
+
+  begin
+    uri = URI.parse(ENV[database_url_key])
+  rescue URI::InvalidURIError
+    raise "Invalid #{database_url_key}"
+  end
+
+  adapter = uri.scheme
+  adapter = "postgresql" if adapter == "postgres"
+
+  database = (uri.path || "").split("/")[1]
+
+  username = uri.user
+  password = uri.password
+
+  host = uri.host
+  port = uri.port
+
+  params = CGI.parse(uri.query || "")
+
+%>
+
+<%= environment %>:
+  <%= attribute "adapter",  adapter %>
+  <%= attribute "database", database %>
+  <%= attribute "username", username %>
+  <%= attribute "password", password, true %>
+  <%= attribute "host",     host %>
+  <%= attribute "port",     port %>
+
+<% params.each do |key, value| %>
+  <%= key %>: <%= value.first %>
+<% end %>
+
+<% end %> <%# end ".each do |environment|" %>

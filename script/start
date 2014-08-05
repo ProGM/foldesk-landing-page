@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# Usage: script/start [--clean] [--verbose] [--with-browser]
+# Start your engines!
+
+# Ensure a bash process tidies up its children
+# (Ref.: http://argandgahandapandpa.wordpress.com/2012/06/22/ensure-a-bash-process-tidies-up-its-children/)
+trap "echo 'An error occurred, check log/bootstrap.log for details'; kill -- -$$" EXIT
+
+set -o errexit
+set -o nounset
+
+# //////////////////////////////////////////////////////////////////////////////
+
+if [[ -z "$(type foreman 2> /dev/null)" ]]; then
+    echo 'You should install Heroku Toolbelt before starting your engines!' >&2
+    exit 1
+fi
+
+# //////////////////////////////////////////////////////////////////////////////
+
+verbose=false
+with_browser=false
+
+for arg in "$@"; do
+    case "$arg" in
+        '--clean' )
+            # This will pass through to script/bootstrap
+            ;;
+        '--skip-database' )
+            # This will pass through to script/bootstrap
+            ;;
+        '--verbose' )
+            verbose=true
+            ;;
+        '--with-browser' )
+            with_browser=true
+            ;;
+        * )
+            echo "Unknown parameter '$arg'." >&2
+            exit 1
+            ;;
+    esac
+done
+
+# //////////////////////////////////////////////////////////////////////////////
+
+script/bootstrap "$@" --log
+
+# //////////////////////////////////////////////////////////////////////////////
+
+rm -f 'tmp/Procfile'
+
+if [[ ! -d 'tmp' ]]; then
+    mkdir 'tmp' &> /dev/null
+fi
+
+if $with_browser; then cat <<EOF >> 'tmp/Procfile'
+web: script/server
+EOF
+fi
+
+if $verbose; then cat <<EOF >> 'tmp/Procfile'
+server: tail -f -n 0 log/development.log
+test:   tail -f -n 0 log/test.log
+sql:    tail -f -n 0 log/sql.log
+EOF
+fi
+
+if [[ -f 'tmp/Procfile' ]]; then
+    foreman start --root=. --procfile='tmp/Procfile' &
+fi
+
+if $with_browser; then
+    set +o errexit
+    curl --head -sS http://localhost:3000 &> /dev/null
+    while [[ "$?" -ne "0" ]]; do
+        sleep 1
+        curl --head -sS http://localhost:3000 &> /dev/null
+    done
+    set -o errexit
+    open -g 'http://localhost:3000/'
+fi
+
+trap "kill -- -$$" EXIT
+bundle exec guard start
