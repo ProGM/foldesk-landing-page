@@ -87,6 +87,8 @@ button.button-blog:active {
       display: inline-block;
       text-align: center;
 
+      @include span-columns( 4 of 8, inline-block );
+      @include shift( 2 );
       margin-top: 15px;
       padding-left: 12px;
       padding-right: 12px;

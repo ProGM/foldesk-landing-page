@@ -21,6 +21,7 @@ group :assets do
   gem 'bourbon'
   gem 'neat'
   gem 'normalize-rails'
+  gem 'font-awesome-rails'
 
   gem 'uglifier', '>= 1.0.3'
 end
