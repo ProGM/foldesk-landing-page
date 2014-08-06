@@ -1,0 +1,20 @@
+.follow-blog {
+  height: 180px;
+  background: #e5e5e5;
+
+  p {
+    font-family: "HelveticaNeue-light";
+    font-size: 30px;
+    letter-spacing: 1px;
+    color: #9b9b9b;
+    text-align: center;
+
+    padding-top: 72px;
+    padding-bottom: 72px;
+
+    span {
+      color: $foldesk-blue;
+    }
+
+  }
+}
