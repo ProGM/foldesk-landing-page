@@ -1,3 +1,171 @@
-// Place all the styles related to the welcome controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.home {
+  background: url(background.jpg) no-repeat center scroll;
+  height: 1025px;
+  width: 100%;
+  position: relative;
+  
+  .blue-overlay {
+    background: rgba(66, 194, 240, .91);
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.foldesk-logo {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  img { height: 92px; }
+}
+
+// Heading and sub-heading ////////////////////////////////////////////////////
+button.button-blog {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  height: 30px;
+  width: 75px;
+
+  background: rgba(255, 255, 255, .28);
+  border: 1px solid rgba(255, 255, 255, .58);
+
+  font-family: "HelveticaNeue-light";
+  font-size: 15px;
+  font-weight: light;
+  letter-spacing: 1px;
+  color: white;
+}
+
+button.button-blog:hover {
+  background: rgba(255, 255, 255, .60);
+}
+
+button.button-blog:active {
+  background: rgba(255, 255, 255, 1);
+  color: $foldesk-blue;
+}
+
+.heading {
+  @include span-columns( 8 of 12, inline-block );
+  @include shift( 2 );
+  margin-top: 310px;
+
+  h1 {
+    font-family: "HelveticaNeue-condensedbold";
+    font-size: 60px;
+    color: white;
+    text-align: center;
+    
+    span {
+      border-bottom: 3px solid white;
+      text-decoration: underline;
+
+    }
+  }
+
+  p.sub-heading {
+    font-family: "HelveticaNeue-thin";
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: white;
+    text-align: center;
+    line-height: 30px;
+
+    margin-top: 15px;
+
+    span {
+      font-family: "HelveticaNeue-bold";
+    }
+  }
+
+  p.release-date {
+      font-family: "HelveticaNeue-thin";
+      color: white;
+      background: rgba(55, 55, 55, .70);
+      letter-spacing: 1px;
+      font-size: 15px;
+      display: inline-block;
+      text-align: center;
+
+      margin-top: 15px;
+      padding-left: 12px;
+      padding-right: 12px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+}
+
+// Notify Me //////////////////////////////////////////////////////////////////
+
+.notify-me {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+  input {
+    width: 500px;
+    height: 50px;
+
+    background: rgba(255, 255, 255, .60);
+    color: $secondary-blue;
+    font-family: "HelveticaNeue-light";
+    font-size: 21px;
+    padding: 20px;
+  }
+
+  input:focus {
+    background: white;
+    border-right: 2px solid rgba(66, 194, 240, .91);
+  }
+
+  button {
+    position: absolute;
+    height: 50px;
+    width: 135px;
+
+    background: white;
+    color: $foldesk-blue;
+    font-family: "HelveticaNeue-medium";
+    font-size: 14px;
+  }
+
+  button:hover {
+    background: #f8f8f8;
+  }
+
+  button:active {
+    background: #f1f1f1;
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
