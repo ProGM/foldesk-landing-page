@@ -1,0 +1,58 @@
+.our-philosophy {
+  background: $dark-grey;
+
+  .content {
+    @include span-columns( 10 of 12, inline-block );
+    @include shift( 1 );
+
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    h2 {
+      font-family: "HelveticaNeue-condensedbold";
+      font-size: 34px;
+      color: $medium-grey;
+      text-align: center;
+    }
+
+    span {
+      width: 80px;
+      display: block;
+      border-bottom: 4px solid $foldesk-blue;
+      margin: 30px auto;
+    }
+
+    p {
+      font-family: "HelveticaNeue-thinitalic";
+      font-size: 24px;
+      color: $medium-grey;
+      text-align: center;
+      line-height: 36px;
+      letter-spacing: 1px;
+    }
+
+    button.manifesto {
+      @include span-columns( 2 );
+      @include shift( 5 );
+      height: 30px;
+
+      margin-top: 30px;
+      
+      font-size: 13px;
+      font-family: "HelveticaNeue-light";
+      color: #8f8f8f;
+      background: #404040;
+      border: 1px solid #5a5a5a;
+    }
+
+    button.manifesto:hover {
+      background: #333333;
+    }
+
+    button.manifesto:active {
+      background: $foldesk-blue;
+      color: #333333;
+      border: 1px solid $foldesk-blue;
+    }
+  }
+}
