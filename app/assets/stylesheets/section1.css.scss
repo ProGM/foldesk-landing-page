@@ -129,6 +129,22 @@ button.button-blog:active {
     border-right: 2px solid rgba(66, 194, 240, .91);
   }
 
+  ::-webkit-input-placeholder {
+   color: rgba(75, 153, 177, .30);
+  }
+
+  :-moz-placeholder { /* Firefox 18- */
+     color: rgba(75, 153, 177, .30);  
+  }
+
+  ::-moz-placeholder {  /* Firefox 19+ */
+     color: rgba(75, 153, 177, .30);  
+  }
+
+  :-ms-input-placeholder {  
+     color: rgba(75, 153, 177, .30);  
+  }
+
   button {
     position: absolute;
     height: 50px;
