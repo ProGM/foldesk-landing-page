@@ -15,7 +15,7 @@
       text-align: center;
     }
 
-    span {
+    span.underline {
       width: 80px;
       display: block;
       border-bottom: 4px solid $foldesk-blue;
@@ -61,7 +61,7 @@
         margin: 0 auto;
 
         a {
-          font-size: 14px;
+          font-size: 13px;
           color: white; 
           padding: 2px;
         }
