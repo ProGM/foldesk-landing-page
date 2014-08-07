@@ -119,6 +119,7 @@ button.button-blog:active {
     margin-top: 160px;
 
     background: rgba(255, 255, 255, .60);
+    border-right: 2px solid rgba(66, 194, 240, .91);
     color: $secondary-blue;
     font-family: "HelveticaNeue-light";
     font-size: 21px;
@@ -126,7 +127,7 @@ button.button-blog:active {
   }
 
   input:focus {
-    background: white;
+    background: rgba(255, 255, 255, .85);
     border-right: 2px solid rgba(66, 194, 240, .91);
   }
 
