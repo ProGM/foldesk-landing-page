@@ -1,0 +1,76 @@
+.our-team {
+  background: $light-grey;
+
+  .content {
+    @include span-columns( 10 of 12, inline-block );
+    @include shift( 1 );
+
+    margin-top: 50px;
+    margin-bottom: 20px;
+
+    h2 {
+      font-family: "HelveticaNeue-condensedbold";
+      font-size: 34px;
+      color: $dark-grey;
+      text-align: center;
+    }
+
+    span {
+      width: 80px;
+      display: block;
+      border-bottom: 4px solid $foldesk-blue;
+      margin: 30px auto;
+    }
+
+    .team-member {
+      @include span-columns( 1 of 4, inline-block );
+      @include omega( 4n table );
+
+      margin-bottom: 30px;
+
+      img {
+        width: 85px;
+        height: 85px;
+        display: block;
+        margin: 0 auto;
+      }
+
+      h3 {
+        font-family: "HelveticaNeue-condensedbold";
+        font-size: 20px;
+        text-align: center;
+        color: $dark-grey;
+
+        margin-top: 10px;
+      }
+
+      p {
+        font-family: "HelveticaNeue";
+        font-size: 14px;
+        text-align: center;
+        color: #9b9b9b;
+        margin-bottom: 5px;
+      }
+
+      button.linkedin {
+        width: 20px;
+        height: 20px;
+
+        background: #d5d5d5;
+        display: block;
+        margin: 0 auto;
+
+        a {
+          font-size: 14px;
+          color: white; 
+          padding: 2px;
+        }
+      }
+
+      button.linkedin:hover {
+        background: $foldesk-blue;
+      }
+    }
+
+  }
+}
