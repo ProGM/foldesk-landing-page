@@ -1,0 +1,71 @@
+.reach-out {
+  .content {
+    @include span-columns( 8 of 12, inline-block );
+    @include shift( 2 );
+
+    margin-top: 50px;
+    margin-bottom: 50px;
+
+    h2 {
+      font-family: "HelveticaNeue-condensedbold";
+      font-size: 34px;
+      color: $dark-grey;
+      text-align: center;
+    }
+
+    span.underline {
+      width: 80px;
+      display: block;
+      border-bottom: 4px solid $foldesk-blue;
+      margin: 30px auto;
+    }
+
+    p {
+      font-family: "HelveticaNeue-thin";
+      font-size: 22px;
+      color: $medium-grey;
+      text-align: center;
+      line-height: 29px;
+      letter-spacing: 1px;
+
+      span {
+        font-family: "HelveticaNeue-medium";
+        color: $foldesk-blue;
+      }
+    }
+
+    h4 {
+      margin-top: 12px;
+      margin-bottom: 40px;
+      text-align: center;
+      a.mailto {
+        font-family: "HelveticaNeue-condensedbold";
+        font-size: 26px;
+        color: $dark-grey;
+      }
+    }
+
+    .fd-social-buttons {
+      text-align: center;
+
+      button {
+        width: 40px;
+        height: 40px;
+        display: inline;
+        background: $foldesk-blue;
+        margin-left: 3px;
+        margin-right: 3px;
+
+        a {
+          font-size: 20px;
+          color: white; 
+          padding: 9px;
+        }
+      }
+
+      button:hover {
+        background: $dark-grey;
+      }
+    }
+  }
+}
