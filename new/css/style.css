@@ -1,0 +1,174 @@
+/* -------------------------------------------------- */
+/* GLOBAL 											  */
+/* -------------------------------------------------- */
+
+a{
+	text-decoration: none;
+	-webkit-transition-delay: 0s;
+	-webkit-transition-duration: 0.2s;
+	-webkit-transition-property: all;
+	-webkit-transition-timing-function: ease-in-out;
+	-moz-transition-delay: 0s;
+	-moz-transition-duration: 0.2s;
+	-moz-transition-property: all;
+	-moz-transition-timing-function: ease-in-out;
+}
+
+/* -------------------------------------------------- */
+/* LAYOUTs 											  */
+/* -------------------------------------------------- */
+
+.content {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    max-width: 960px;
+}
+
+.content-text{
+	padding-left: 1em;
+	padding-right: 1em;
+	font-family: "Raleway";
+	color: rgb(80,80,80);
+	font-weight: 500;
+}
+
+/* -------------------------------------------------- */
+/* TYPOs 											  */
+/* -------------------------------------------------- */
+
+h1{
+	font-size: 2.5em;
+	font-family: "Raleway";
+	letter-spacing: 1px;
+	font-weight: 500;
+	line-height: 1.1;
+}
+
+h2{
+	font-size: 1.5em;
+	font-family: "Raleway";
+	letter-spacing: 1px;
+	font-weight: 500;
+	line-height: 1.1;
+}
+
+h3{
+	font-size: 1.2em;
+	font-family: "Raleway";
+	letter-spacing: 1px;
+	font-weight: 500;
+	line-height: 1.05;
+}
+
+h4{
+	font-size: 1.1em;
+	font-family: "Raleway";
+	letter-spacing: 1px;
+	font-weight: 500;
+	line-height: 1.05;
+	color: rgb(80,80,80);
+}
+
+p{
+	text-align: justify;
+	font-size: 0.8em;
+	font-family: "Raleway";
+	letter-spacing: 1px;
+	font-weight: 500;
+	line-height: 1.4;
+	color: rgb(80,80,80);
+}
+
+small{
+	font-size: 0.8em;
+	font-family: "Raleway";
+	letter-spacing: 1px;
+	font-weight: 500;
+	line-height: 1;
+	color: rgb(80,80,80);
+}
+
+.text-white{
+	color: rgb(255,255,255);
+}
+
+.text-blue{
+	color: rgb(85, 153, 211);
+}
+
+.text-blue:hover{
+    color: #0b698b
+}
+
+.text-left{
+	text-align: left;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.text-right{
+	text-align: right;
+}
+
+.text-justify{
+	text-align: justify;
+}
+
+
+/* -------------------------------------------------- */
+/* COLORs 											  */
+/* -------------------------------------------------- */
+
+.white-opaque{
+	background: rgba(255,255,255,0.85);
+}
+
+.blue-foldesk{
+	background: rgba(63,193,240,1.00);
+}
+
+
+/* -------------------------------------------------- */
+/* SCROLLBARs 											  */
+/* -------------------------------------------------- */
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+/* -------------------------------------------------- */
+/* SPACERs 											  */
+/* -------------------------------------------------- */
+
+/* Da convertire in em */
+
+.spacer5 { height: 5px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer10 { height: 10px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer15 { height: 15px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer20 { height: 20px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer25 { height: 25px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer30 { height: 30px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer35 { height: 35px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer40 { height: 40px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer45 { height: 45px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer50 { height: 50px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer75 { height: 75px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer100 { height: 100px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer125 { height: 125px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+.spacer200 { height: 200px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block; }
+
+.ptSpacer5 {padding-top: 5px !important;}
+.ptSpacer10 {padding-top: 10px !important;}
+.ptSpacer15 {padding-top: 15px !important;}
+.ptSpacer20 {padding-top: 20px !important;}
+.ptSpacer25 {padding-top: 25px !important;}
+
+/* -------------------------------------------------- */
+/* RESPONSIVE										  */
+/* -------------------------------------------------- */
